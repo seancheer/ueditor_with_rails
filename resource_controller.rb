@@ -1,21 +1,16 @@
-# ueditor_with_rails
-
-# User Guiding
-
-## 1. Ueditor with rails. I created this project because Ueditor with rails can not be found on the internet and on the official site.
-
-### 1.1 Step 1. Put directory of the ueditor under ``/public/plugins/`` under your project. The default controller name is ``resource_controller.rb``. You can custom it with ``ueditor.config.js`` if it doesn't suite your project.
-
-### 1.2 Step 2. You can custom more settings with ``config.json`` of the ueditor. I will show my ``resource_controller.rb`` below that you can find in this repo.
-
-```ruby
 #encoding:utf-8
+=begin
+本文件仅供参考
+作者： 李江涛
+完成日期： 2016/05/13
+=end
 require 'json'
 require 'tempfile'
 require 'base64'
 #用于上传项目相关的资源
 class ResourceController < ApplicationController
   #ueditor的配置
+  __anno__desc "负责处理ueditor上传的所有文件"
   def handle_file
     #ueditor是通过在url中的传入ueditor_action（原本为action，但是由于其与rails冲突，所以我将其改为了ueditor_action）字段来区分具体的操作的
     return if params[:ueditor_action].blank?
@@ -23,7 +18,7 @@ class ResourceController < ApplicationController
 
     #刚进入页面时editor会进行config的访问
     if (cur_action == "config")
-      #打开config.json文件，将其返回，注意，我这里是将config.json文件放在/public/plugins/ueditor/目录下，可以自己的需求，对这里进行相应的更改
+      #打开config.json文件，将其返回，注意，我这里是将config.json文件放在/public/plugins/ueditor/目录下，可以自己的需求，可以对这里进行相应的更改
       json = File.read("#{Rails.root.to_s}/public/plugins/ueditor/config.json")
       #正则替换，使其成为ueditor可以识别的格式
       json = json.gsub(/\/\*[\s\S]+?\*\//, "")
@@ -106,4 +101,3 @@ private
     rand(36 ** num).to_s(36)
   end
 end
-```
