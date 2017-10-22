@@ -107,3 +107,7 @@ private
   end
 end
 ```
+
+
+
+## 2 More infomations you can get in my <a href="http://www.cnblogs.com/seancheer/p/5488971.html">blog</a>.
